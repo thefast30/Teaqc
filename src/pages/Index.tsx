@@ -94,7 +94,7 @@ const Index = () => {
               Desenvolvimento Especializado
             </Badge>
             <img 
-              src="/lovable-uploads/6f805930-d66c-4969-b015-65f32426ba53.png" 
+              src="https://i.imgur.com/yPIPAUR.png" 
               alt="TEAQC Logo"
               className="w-32 h-24 lg:w-40 lg:h-32 object-contain mx-auto"
             />
