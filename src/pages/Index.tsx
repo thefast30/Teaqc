@@ -20,12 +20,34 @@ import {
 import heroImage from "@/assets/hero-image.jpg";
 import Autoplay from "embla-carousel-autoplay";
 
+declare global {
+  interface Window {
+    gtag: (command: string, targetId: string, config?: any) => void;
+  }
+}
+
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  const handleWhatsAppClick = (url: string) => {
+    // Dispara evento de conversão do Google Ads
+    if (typeof window.gtag !== 'undefined') {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-17515713674/IDDaCOLyhZMbEIqpkqBB',
+        'value': 1.0,
+        'currency': 'BRL'
+      });
+    }
+    
+    // Redireciona após pequeno delay para garantir o disparo
+    setTimeout(() => {
+      window.open(url, '_blank');
+    }, 300);
+  };
 
   const services = [
     {
@@ -72,7 +94,7 @@ const Index = () => {
               Desenvolvimento Especializado
             </Badge>
             <img 
-              src="/lovable-uploads/6c939a2a-e112-443b-87a8-147ebb62e6b4.png" 
+              src="/lovable-uploads/6f805930-d66c-4969-b015-65f32426ba53.png" 
               alt="TEAQC Logo"
               className="w-32 h-24 lg:w-40 lg:h-32 object-contain mx-auto"
             />
@@ -105,7 +127,7 @@ const Index = () => {
                   variant="hero" 
                   size="lg"
                   className="text-lg px-8 py-6"
-                  onClick={() => window.open('https://api.whatsapp.com/send?phone=5581992090302&text=Olá%2C%20gostaria%20de%20saber%20mais', '_blank')}
+                  onClick={() => handleWhatsAppClick('https://api.whatsapp.com/send?phone=5581992090302&text=Olá%2C%20gostaria%20de%20saber%20mais')}
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
                   Conheça Mais
@@ -368,7 +390,7 @@ const Index = () => {
                   <Button 
                     variant="whatsapp" 
                     className="w-full"
-                    onClick={() => window.open('https://api.whatsapp.com/send?phone=5581992090302&text=Olá%2C%20gostaria%20de%20saber%20mais', '_blank')}
+                    onClick={() => handleWhatsAppClick('https://api.whatsapp.com/send?phone=5581992090302&text=Olá%2C%20gostaria%20de%20saber%20mais')}
                   >
                     <MessageCircle className="w-4 h-4 mr-2" />
                     Conversar no WhatsApp
@@ -438,7 +460,7 @@ const Index = () => {
               variant="ghost" 
               size="icon"
               className="text-background hover:text-primary hover:bg-background/10"
-              onClick={() => window.open('https://api.whatsapp.com/send?phone=5581992090302', '_blank')}
+              onClick={() => handleWhatsAppClick('https://api.whatsapp.com/send?phone=5581992090302')}
             >
               <MessageCircle className="w-5 h-5" />
             </Button>
