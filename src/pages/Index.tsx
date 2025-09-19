@@ -34,19 +34,7 @@ const Index = () => {
   }, []);
 
   const handleWhatsAppClick = (url: string) => {
-    // Dispara evento de conversão do Google Ads
-    if (typeof window.gtag !== 'undefined') {
-      window.gtag('event', 'conversion', {
-        'send_to': 'AW-17515713674/IDDaCOLyhZMbEIqpkqBB',
-        'value': 1.0,
-        'currency': 'BRL'
-      });
-    }
-    
-    // Redireciona após pequeno delay para garantir o disparo
-    setTimeout(() => {
-      window.open(url, '_blank');
-    }, 300);
+    window.open(url, '_blank');
   };
 
   const services = [
@@ -94,7 +82,7 @@ const Index = () => {
               Desenvolvimento Especializado
             </Badge>
             <img 
-              src="https://i.imgur.com/yPIPAUR.png" 
+              src="/lovable-uploads/6f805930-d66c-4969-b015-65f32426ba53.png" 
               alt="TEAQC Logo"
               className="w-32 h-24 lg:w-40 lg:h-32 object-contain mx-auto"
             />
