@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,29 +16,69 @@
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) — carrega UMA vez -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17515713674"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag(){ dataLayer.push(arguments); }
       gtag('js', new Date());
-
-      gtag('config', 'AW-17515713674');
+      gtag('config', 'AW-17515713674'); // não duplique isso no GTM
     </script>
-
-    <!-- Event snippet for Contacto (1) conversion page -->
-    <script>
-      gtag('event', 'conversion', {
-          'send_to': 'AW-17515713674/IDDaCOLyhZMbEIqpkqBB',
-          'value': 1.0,
-          'currency': 'BRL'
-      });
-    </script>
-
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Conversão no clique do WhatsApp -->
+    <script>
+      // ==== TROQUE AQUI se mudar o label da ação de conversão ====
+      const ADS_CONVERSION = {
+        send_to: 'AW-17515713674/BGWLCPPOr5AbElqpkqBB',
+        value: 1.0,
+        currency: 'BRL'
+      };
+
+      function fireWhatsAppConversion(a) {
+        const href = a && a.href ? a.href : null;
+        const openInNew = a && a.target === '_blank';
+
+        const go = () => {
+          if (!href) return;
+          if (openInNew) {
+            window.open(href, '_blank', 'noopener');
+          } else {
+            location.href = href;
+          }
+        };
+
+        try {
+          gtag('event', 'conversion', {
+            ...ADS_CONVERSION,
+            event_callback: go,
+            event_timeout: 1200
+          });
+        } catch (e) { go(); }
+      }
+
+      function attachWhatsAppConversion() {
+        const sel = 'a[href*="wa.me/"], a[href*="api.whatsapp.com/send"], [data-whatsapp-link]';
+        document.querySelectorAll(sel).forEach(a => {
+          if (a.dataset.convBound) return;
+          a.dataset.convBound = '1';
+
+          a.addEventListener('click', (ev) => {
+            // respeita middle click e modificadores (abrir em nova aba)
+            if (ev.button === 1 || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+            ev.preventDefault();
+            fireWhatsAppConversion(a);
+          }, { capture: true });
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', attachWhatsAppConversion);
+      new MutationObserver(attachWhatsAppConversion)
+        .observe(document.documentElement, { childList: true, subtree: true });
+    </script>
   </body>
 </html>
