@@ -34,7 +34,19 @@ const Index = () => {
   }, []);
 
   const handleWhatsAppClick = (url: string) => {
-    window.open(url, '_blank');
+    // Dispara evento de conversão do Google Ads
+    if (typeof window.gtag !== 'undefined') {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-17515713674/BGWLCPPOr5AbElqpkqBB',
+        'value': 1.0,
+        'currency': 'BRL'
+      });
+    }
+    
+    // Redireciona após pequeno delay para garantir o disparo
+    setTimeout(() => {
+      window.open(url, '_blank');
+    }, 300);
   };
 
   const services = [
