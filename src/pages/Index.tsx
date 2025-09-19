@@ -94,7 +94,7 @@ const Index = () => {
               Desenvolvimento Especializado
             </Badge>
             <img 
-              src="lovable-uploads/teaqclogo.png" 
+              src="lovable-uploads/teaqclogo1.png.png" 
               alt="TEAQC Logo"
               className="w-32 h-24 lg:w-40 lg:h-32 object-contain mx-auto"
             />
