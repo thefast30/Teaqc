@@ -42,6 +42,11 @@ const Index = () => {
         'currency': 'BRL'
       });
     }
+
+    // Dispara evento de conversão do Pixel da Meta (ADICIONE ESTA PARTE)
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Purchase', {value: 39.90, currency: 'BRL'});
+  }
     
     // Redireciona após pequeno delay para garantir o disparo
     setTimeout(() => {
