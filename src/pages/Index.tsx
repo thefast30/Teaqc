@@ -22,6 +22,12 @@ import Autoplay from "embla-carousel-autoplay";
 
 declare global {
   interface Window {
+    fbq: (...args: any[]) => void;
+  }
+}
+
+declare global {
+  interface Window {
     gtag: (command: string, targetId: string, config?: any) => void;
   }
 }
